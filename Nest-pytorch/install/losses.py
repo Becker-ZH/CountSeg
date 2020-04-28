@@ -5,6 +5,10 @@ from nest import register
 import torch
 import math
 
+# add
+from scipy.ndimage import gaussian_filter
+import numpy
+
 @register
 def class_reg_loss98_6(
     input: Tensor, 
@@ -89,7 +93,13 @@ def class_reg_loss96_7_2(
     # print(index3.size(),index4.size())
     loss_all=F.multilabel_soft_margin_loss(input, target, None, size_average, reduce)
     if torch.sum(index4)!=0:
-        loss_all=loss_all+loss3(output2[index4],output4[index4])
+        # add
+        tmp = numpy.array(output2[index4])
+        gtmp = gaussian_filter(tmp, sigma=0.5)
+        loss_all=loss_all+loss3(gtmp,output4[index4])
+
+        # original
+        # loss_all=loss_all+loss3(output2[index4],output4[index4])
     if torch.sum(index3)!=0:
         loss_all=loss_all+loss2(output2[index3], output4[index3])
     if torch.sum(index2_3)!=0:

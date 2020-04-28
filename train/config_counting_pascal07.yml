@@ -3,7 +3,7 @@ data_loaders:
   _name: fetch_data
   dataset: 
     _name: pascal_voc_classification
-    data_dir: /raid/xiaoke/pascal_2007/VOCdevkit   ## pascal dataset path, change to your local path
+    data_dir: /home/ubuntu/mnt/data/VOCdevkit   ## pascal dataset path, change to your local path
     year: 2007
   batch_size: 16                     ## batch size for training
   num_workers: 4

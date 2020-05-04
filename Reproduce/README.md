@@ -5,8 +5,8 @@ In our reproduction, we have modified following files. The files with `colab` ca
 In order to test a file, copy it to the location following it and then run it.
 
 ```
-1. `demo-local.py`          `CountSeg/demo`
-2. `test-colab.ipynb`       `CountSeg/test`
-3. `train-colab.ipynb`      `CountSeg/train`
-4. `training-local.ipynb`   `CountSeg/test`
+1. demo-local.py          CountSeg/demo
+2. test-colab.ipynb       CountSeg/test
+3. train-colab.ipynb      CountSeg/train
+4. training-local.ipynb   CountSeg/test
 ```

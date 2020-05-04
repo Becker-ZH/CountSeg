@@ -3,6 +3,8 @@
 2. Result-Analysis
 3. Improve-1
 
+Please find reproduce instructions in the above three folders.
+
 # Object Counting and Instance Segmentation with Image-level Supervision, in CVPR 2019
 
 [Paper](https://arxiv.org/abs/1903.02494) [Supp]() [Presentation]() [Poster]()

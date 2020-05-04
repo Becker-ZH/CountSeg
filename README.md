@@ -1,7 +1,7 @@
 # Our Modifications
 1. Reproduce
 2. Result-Analysis
-3. improve-1
+3. Improve-1
 
 # Object Counting and Instance Segmentation with Image-level Supervision, in CVPR 2019
 

@@ -1,13 +1,14 @@
+# Our Modifications
+1. Reproduce
+2. Result-Analysis
+3. improve-1
+
 # Object Counting and Instance Segmentation with Image-level Supervision, in CVPR 2019
 
 [Paper](https://arxiv.org/abs/1903.02494) [Supp]() [Presentation]() [Poster]()
 
 ![block images](https://github.com/GuoleiSun/CountSeg/blob/master/demo/images/block.png)
 
-## Our Modifications
-1. Reproduce
-2. Result-Analysis
-3. improve-1
 
 ## Requirements:
 1. System: ubuntu 16.04. 

@@ -91,7 +91,6 @@ dependencies:
     - mistune==0.8.4
     - nbconvert==5.5.0
     - nbformat==4.4.0
-    - nest==0.1.1
     - networkx==2.3
     - notebook==5.7.8
     - pandocfilters==1.4.2
@@ -103,9 +102,7 @@ dependencies:
     - prometheus-client==0.6.0
     - prompt-toolkit==2.0.9
     - ptyprocess==0.6.0
-    - pycocotools==2.0
     - pygments==2.3.1
-    - pyinn==0.0.1
     - pyparsing==2.4.0
     - pyrsistent==0.15.1
     - python-dateutil==2.8.0

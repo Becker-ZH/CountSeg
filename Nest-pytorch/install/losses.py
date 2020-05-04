@@ -23,21 +23,35 @@ def class_reg_loss98_6(
     loss in the first stage for both pascal and coco
     tl: substizing range
     """
-    gt=target.clone()
+    gt=target.clone()  # ground truth
 
     index2=gt!=0
     target[index2]=1
-    index2_2=gt<=tl-1
-    index2_4=gt>=tl
-    index2=index2&index2_2
+    index2_2=gt<=tl-1    # in the subitizing (sb) range
+    index2_4=gt>=tl      # beyond this range
+    index2=index2&index2_2   # mask of whether in the sb range
     num_class=int(gt.size()[1])
     loss2 = torch.nn.MSELoss()
     loss5 = torch.nn.MarginRankingLoss(margin=0.0)
 
-    aggregation1 = F.adaptive_avg_pool2d(output2, 1).squeeze(2).squeeze(2)
+    aggregation1 = F.adaptive_avg_pool2d(output2, 1).squeeze(2).squeeze(2)  # average of 14*14 density map for each image and each class
 
     loss_all=loss2(aggregation1[index2], gt[index2])+F.multilabel_soft_margin_loss(input, target, None, size_average, reduce)
-    if torch.sum(index2_4)!=0:
+    #            first term: MLE of counts             second term: classification loss  
+    # we need to add another term here for the "relMLE of counts"
+    
+    loss_all = loss_all + 3 * torch.sum(1.0 / (gt[index2] + 1) * (aggregation1[index2] - gt[index2]) ** 2)
+    # ref: https://discuss.pytorch.org/t/how-to-implement-weighted-mean-square-error/2547
+
+    #print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh: start")
+    #print(1.0 / (gt[index2] + 1))
+    #print((1.0 / (gt[index2] + 1)).shape)
+    #print("--")
+    #print(gt[index2])
+    #print(gt[index2].shape)
+    #print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh: end")
+
+    if torch.sum(index2_4)!=0:  # ranking loss
         num_ins_5=torch.sum(index2_4)
         loss_all=loss_all+0.1*loss5(aggregation1[index2_4],tl*torch.ones((num_ins_5,)).cuda(),torch.ones((num_ins_5,)).cuda())
     return loss_all
@@ -67,12 +81,12 @@ def class_reg_loss96_7_2(
     # index1_pre=input>=0
     # index1=(index1&index1_pre)
     index2=gt!=0
-    index2_2=gt<=4
-    index2_4=gt>=5
+    index2_2=gt<=4   # below sb
+    index2_4=gt>=5   # beyond sb
     index2=index2&index2_2
 
     index2_3=index2.clone()
-    index2_3=index1_sam|index2_3
+    index2_3=index1_sam|index2_3   # ???
 
     batch_size=int(gt.size()[0])
     num_class=int(gt.size()[1])
@@ -104,6 +118,7 @@ def class_reg_loss96_7_2(
         loss_all=loss_all+loss2(output2[index3], output4[index3])
     if torch.sum(index2_3)!=0:
         loss_all=loss_all+loss4(aggregation1[index2_3],gt[index2_3])
+        loss_all=loss_all+3*torch.sum(1.0 / (gt[index2_3] + 1) * (aggregation1[index2_3] - gt[index2_3]) ** 2)  # relMSE
     if torch.sum(index2_4)!=0:
         num_ins_5=torch.sum(index2_4)
         loss_all=loss_all+0.1*loss5(aggregation1[index2_4],5*torch.ones((num_ins_5,)).cuda(),torch.ones((num_ins_5,)).cuda())

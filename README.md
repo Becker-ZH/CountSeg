@@ -5,6 +5,10 @@
 
 Please find reproduce instructions in the above three folders.
 
+4. Improve-2
+Please run train/main_coc0.py and train/main_pascal.py to reproduce.
+
+
 # Object Counting and Instance Segmentation with Image-level Supervision, in CVPR 2019
 
 [Paper](https://arxiv.org/abs/1903.02494) [Supp]() [Presentation]() [Poster]()

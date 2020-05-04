@@ -4,6 +4,10 @@
 
 ![block images](https://github.com/GuoleiSun/CountSeg/blob/master/demo/images/block.png)
 
+## Our Modifications
+1. Reproduce
+2. Result-Analysis
+3. improve-1
 
 ## Requirements:
 1. System: ubuntu 16.04. 
